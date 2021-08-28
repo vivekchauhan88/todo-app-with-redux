@@ -1,62 +1,57 @@
-//import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 
 function App() {
+  const tasks = ['Buy apples', 'Feed cow', 'Walk cow', 'Drink water', 'Eat dates']
+
   return (
-    <div className="App">
-      <h1>To-do App</h1>
+    <Container className="App">
       <br />
-      <br />
-          <Form>
+      <Row align='center'>
+        <Col xs={0} md={2}>
+        </Col>
+        <Col xs={8} md={6}>
+          <h1>To-do App</h1>
+        </Col>
+        <Col xs={4} md={4}>
+        </Col>
+      </Row>
+      <br /><br />
+      <Form>
+        <Row>
+          <Col xs={0} md={2}>
+          </Col>
+          <Col xs={8} md={6}>
+            <Form.Control placeholder="Add a task" />
+          </Col>
+          <Col xs={4} md={4}>
+            <Button variant="primary">Create</Button>
+          </Col>
+        </Row>
+      </Form>
+      <br /><hr />
+      {
+        tasks.map(task => (
+          <>
             <Row>
-              <Col>
+              <Col xs={0} md={2}>
               </Col>
-              <Col xs={6}>
-                <Form.Control placeholder="Add a task"/>
+              <Col xs={8} md={6}>
+                <h5>{task}</h5>
               </Col>
-              <Col xs={4}>
-                <Button variant="primary">Create</Button>
+              <Col xs={4} md={4} className='icons'>
+                <AiOutlineEdit />{' '}
+                <AiOutlineDelete />
               </Col>
             </Row>
-          </Form>
-        <br />
-        <hr />
-        
-        <p><Row><Col></Col><Col xs={6}>
-        Buy apples</Col><Col xs={4}>
-        <Button variant="info">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
-        </Col></Row></p>
-        <hr />
-        <p><Row><Col></Col><Col xs={6}>
-        Feed cat</Col><Col xs={4}>
-        <Button variant="info">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
-        </Col></Row></p>
-        <hr />
-        <p><Row><Col></Col><Col xs={6}>
-        Walk dog</Col><Col xs={4}>
-        <Button variant="info">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
-        </Col></Row></p>
-        <hr />
-        <p><Row><Col></Col><Col xs={6}>
-        Drink water</Col><Col xs={4}>
-        <Button variant="info">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
-        </Col></Row></p>
-        <hr />
-        <p><Row><Col></Col><Col xs={6}>
-        Eat bananas</Col><Col xs={4}>
-        <Button variant="info">Edit</Button>{' '}
-        <Button variant="danger">Delete</Button>
-        </Col></Row></p>
-        <hr />
-        
-    </div>
-  );
+            <hr />
+          </>
+        ))
+      }
+    </Container>
+  )
 }
 
 export default App;
