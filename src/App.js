@@ -2,9 +2,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import { useState, useEffect } from 'react';
 
 function App() {
-  const tasks = ['Buy apples', 'Feed cow', 'Walk cow', 'Drink water', 'Eat dates']
+  const [task, setTask] = useState('')
+  const [tasks, setTasks] = useState(['Feed cow', 'Walk cow', 'Drink water'])
+  const createTask = e => {
+    e.preventDefault()
+    console.log(task)
+    if(task) {
+      //setTasks([...tasks, task])
+      tasks.push(task)
+      console.log(tasks)
+      setTask('')
+    }
+  }
 
   return (
     <Container className="App">
@@ -19,15 +31,15 @@ function App() {
         </Col>
       </Row>
       <br /><br />
-      <Form>
+      <Form onSubmit={createTask}>
         <Row>
           <Col xs={0} md={2}>
           </Col>
           <Col xs={8} md={6}>
-            <Form.Control placeholder="Add a task" />
+            <Form.Control placeholder="Add a task" value={task} onChange={e => setTask(e.target.value)} />
           </Col>
           <Col xs={4} md={4}>
-            <Button variant="primary">Create</Button>
+            <Button variant="primary" type='submit'>Create</Button>
           </Col>
         </Row>
       </Form>
@@ -42,8 +54,8 @@ function App() {
                 <h5>{task}</h5>
               </Col>
               <Col xs={4} md={4} className='icons'>
-                <AiOutlineEdit />{' '}
-                <AiOutlineDelete />
+                <AiOutlineEdit className='icon' onClick={() => console.log('edited')} />{' '}
+                <AiOutlineDelete className='icon' onClick={() => console.log('deleted')} />
               </Col>
             </Row>
             <hr />

@@ -9,3 +9,7 @@
 .icons {
   zoom: 1.5;
 }
+
+.icon {
+  cursor: pointer;
+}
