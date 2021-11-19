@@ -3,31 +3,27 @@ import "./App.css";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodo, deleteTodo, editTodo } from './actions';
 
 function App() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState(["Feed cow", "Walk cow", "Drink water"]);
-  const [modify, setModify] = useState(false);
+  const tasks = useSelector(state => state)
+  console.log(tasks)
+  const dispatch = useDispatch()
 
   const createTask = (e) => {
     e.preventDefault();
-    console.log(task);
     if (task) {
-      //setTasks([...tasks, task])
-      tasks.push(task);
-      console.log(tasks);
+      dispatch(addTodo(task))
       setTask("");
     }
   };
   const edit = (i, e) => {
-    setTasks([
-      ...tasks.slice(0, i),
-      e.target.value,
-      ...tasks.slice(i + 1, tasks.length),
-    ]);
+    dispatch(editTodo(i, e))
   };
   const remove = (i) => {
-    setTasks(tasks.slice(0, i).concat(tasks.slice(i + 1, tasks.length)));
+    dispatch(deleteTodo(i))
     console.log("deleted");
   };
 
